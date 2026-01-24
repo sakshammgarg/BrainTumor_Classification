@@ -115,7 +115,7 @@ pip install tensorflow numpy pandas matplotlib seaborn scikit-learn scipy opencv
 
 ```bash
 git clone https://github.com/sakshammgarg/BrainTumor_Classification.git
-cd Brain_Tumor_Classification
+cd BrainTumor_Classification
 
 ```
 
