@@ -114,7 +114,7 @@ pip install tensorflow numpy pandas matplotlib seaborn scikit-learn scipy opencv
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/sakshammgarg/Brain_Tumor_Classification.git
+git clone https://github.com/sakshammgarg/BrainTumor_Classification.git
 cd Brain_Tumor_Classification
 
 ```
@@ -128,7 +128,6 @@ cd Brain_Tumor_Classification
   /brain-tumor-mri-dataset
     /Training
     /Testing
-
 ```
 
 ## Usage
