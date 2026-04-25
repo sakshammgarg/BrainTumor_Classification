@@ -4,7 +4,7 @@ This project focuses on automated brain tumor classification using deep learning
 
 ## Project Description
 
-This project aims to build a clinically rigorous automated brain tumor classification system using a **Cross-Validated Stacked Ensemble** deep learning model with transfer learning. Multiple state-of-the-art pretrained CNN architectures are combined to improve classification accuracy and reliability. To address the critical need for trust in medical AI, the project implements **Probability Calibration**, **Uncertainty Quantification**, and **Explainable AI (XAI)** techniques (Grad-CAM) to interpret model predictions and visualize tumor localization.
+This project aims to build a clinically rigorous automated brain tumor classification system using a **Cross-Validated Stacked Ensemble** deep learning model with transfer learning. Multiple state-of-the-art pretrained CNN architectures are combined to improve classification accuracy and reliability. To address the critical need for trust in medical AI, the project implements **Probability Calibration**, **Uncertainty Quantification**, and **Explainable AI (XAI)** techniques (Grad-CAM) to interpret model predictions and visualize tumor localization. Four novel clinical contributions extend the baseline: **(A) Uncertainty-Aware Triage** via Temperature Scaling and Test-Time Augmentation, **(B) Prototype-Based Explanation** using embedding similarity retrieval, **(C) Scanner Domain-Shift Robustness** testing against MRI-realistic degradations, and **(D) Deep Uncertainty Characterisation** with per-class entropy profiling.
 
 ## Key Steps
 
@@ -57,14 +57,18 @@ Evaluate models using comprehensive clinical metrics:
 * **Confusion Matrices**: Detailed breakdown of diagnostic errors
 * **95% Confidence Intervals**: Bootstrapped statistical robustness check
 
-### 6) Explainable AI & Calibration
+### 6) Explainable AI, Calibration & Novel Contributions
 
-Ensure clinical reliability through advanced validation:
+Ensure clinical reliability through advanced validation and four novelty contributions:
 
 * **Grad-CAM**: Visualizing tumor regions to verify model focus
 * **Calibration Curves**: Reliability diagrams to check if "90% confidence" means "90% probability"
 * **Brier Score**: Metric for the accuracy of probabilistic predictions
 * **Entropy Analysis**: Quantifying model uncertainty/confusion
+* **Novelty A — Uncertainty-Aware Clinical Triage**: Temperature Scaling (fitted on a held-out calibration split) combined with Test-Time Augmentation (TTA, K=10) to sharpen probability estimates; a confidence threshold automatically routes high-confidence cases to auto-approval and flags low-confidence cases for radiologist review
+* **Novelty B — Prototype-Based Explanation**: Nearest-neighbour retrieval in the CNN embedding space (cosine similarity) surfaces the most visually similar confirmed training cases for each query MRI, providing a human-interpretable "this scan resembles these known cases" explanation alongside Grad-CAM
+* **Novelty C — Scanner Domain-Shift Robustness**: Systematic stress-testing of the ensemble against three MRI-realistic degradations — Rician noise, k-space undersampling, and bias-field corruption — each evaluated at None / Mild / Moderate / Severe levels to quantify real-world scanner variability tolerance
+* **Novelty D — Uncertainty Characterisation**: Per-class entropy profiling, accuracy-vs-confidence-percentile curves, and an active-learning priority queue of the top-8 most uncertain test cases to guide targeted data collection
 
 ## Results
 
@@ -77,6 +81,10 @@ The project demonstrates highly effective brain tumor classification with rigoro
 * Calibration analysis confirms valid, trustworthy probability scores (low Brier score)
 * Entropy analysis shows significantly reduced uncertainty compared to single models
 * Grad-CAM visualizations successfully localize tumor regions without manual segmentation
+* Temperature Scaling + TTA further reduces Expected Calibration Error (ECE) and lifts accuracy on the auto-approved triage subset
+* Prototype retrieval provides case-based visual explanations with cosine-similarity scores for each prediction
+* Domain-shift robustness testing quantifies accuracy drop under Rician noise, k-space undersampling, and bias-field corruption across four severity levels
+* Per-class entropy analysis identifies the hardest and easiest tumor classes and shows accuracy gains when retaining only the most confident predictions
 
 ## Dataset
 
@@ -142,6 +150,10 @@ The notebook will:
 4. Display comprehensive evaluation metrics (Accuracy, Sensitivity, Specificity)
 5. Generate **Calibration Curves** and **Uncertainty Histograms**
 6. Visualize tumor localization using **Grad-CAM** heatmaps
+7. Run **Novelty A**: Temperature Scaling + TTA triage pipeline
+8. Run **Novelty B**: Prototype-Based Explanation via embedding retrieval
+9. Run **Novelty C**: Scanner Domain-Shift Robustness evaluation
+10. Run **Novelty D**: Per-class uncertainty characterisation and active-learning queue
 
 ## Model Selection Guide
 
@@ -163,6 +175,10 @@ This comprehensive implementation includes:
 * **Uncertainty Quantification**: Measuring prediction entropy
 * **Statistical Rigor**: Bootstrapped Confidence Intervals for accuracy
 * **Explainable AI (XAI)**: Grad-CAM for visual tumor verification
+* **Uncertainty-Aware Triage (Novelty A)**: Temperature Scaling + TTA with automated confidence-based case routing
+* **Prototype-Based Explanation (Novelty B)**: Embedding-space nearest-neighbour retrieval for case-based interpretability
+* **Domain-Shift Robustness Testing (Novelty C)**: Stress-testing under Rician noise, k-space undersampling, and bias-field corruption
+* **Deep Uncertainty Characterisation (Novelty D)**: Per-class entropy profiling and active-learning priority queue
 
 ## Applications
 
@@ -187,4 +203,4 @@ Potential enhancements for even better results:
 
 ---
 
-This project demonstrates how **Stacked Ensemble Learning**, **Probability Calibration**, and **Explainable AI** can be combined to build accurate, reliable, and trustworthy medical diagnostic systems suitable for clinical research and application.
+This project demonstrates how **Stacked Ensemble Learning**, **Probability Calibration**, **Explainable AI**, and four novel clinical contributions (Uncertainty-Aware Triage, Prototype-Based Explanation, Scanner Robustness Testing, and Uncertainty Characterisation) can be combined to build accurate, reliable, and trustworthy medical diagnostic systems suitable for clinical research and application.
