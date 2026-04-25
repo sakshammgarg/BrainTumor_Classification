@@ -203,4 +203,4 @@ Potential enhancements for even better results:
 
 ---
 
-This project demonstrates how **Stacked Ensemble Learning**, **Probability Calibration**, **Explainable AI**, and four novel clinical contributions (Uncertainty-Aware Triage, Prototype-Based Explanation, Scanner Robustness Testing, and Uncertainty Characterisation) can be combined to build accurate, reliable, and trustworthy medical diagnostic systems suitable for clinical research and application.
+This project demonstrates how **Stacked Ensemble Learning**, **Probability Calibration**, **Explainable AI**, and four novel clinical contributions (Uncertainty-Aware Triage, Prototype-Based Explanation, Scanner Robustness Testing, and Uncertainty Characterisation) can be combined to build accurate, reliable, and trustworthy medical diagnostic systems suitable for clinical research and application. 
